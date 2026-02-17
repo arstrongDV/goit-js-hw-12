@@ -42,3 +42,21 @@ img{
     height: 200px;
     width: 100%;
 }
+
+
+.loadMoreBtn{
+    display: flex;
+    align-self: center;
+    width: 125px;
+    height: 40px;
+
+    margin: 32px 0 42px 0;
+}
+
+.loadMoreBtn.visible {
+    display: inline-block; 
+}
+
+.loadMoreBtn.hidden {
+    display: none;
+}

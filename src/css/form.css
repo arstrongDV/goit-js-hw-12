@@ -37,8 +37,11 @@ input::placeholder {
 }
 
 button{
+    display: flex;
     border-radius: 8px;
     border: none;
+    align-items: center;
+    justify-content: center;
     padding: 8px 16px;
     width: 91px;
     height: 40px;

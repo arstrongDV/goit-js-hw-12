@@ -20,6 +20,7 @@ let currentPage = 1;
 const getData = async(text) => {
     clearGallery();
     showLoader();
+    hideLoadMoreButton();
 
     currentQuery = text;
     currentPage = 1;
@@ -27,7 +28,7 @@ const getData = async(text) => {
     try{
         const data = await getImagesByQuery(text);
         hideLoader()
-        if (data.totalHits === 0) {
+        if (data.hits.length === 0) {
             iziToast.show({
                 message: 'Sorry, there are no images matching your search query. Please try again!'
             });
@@ -38,6 +39,11 @@ const getData = async(text) => {
 
         if(currentPage < Math.ceil(data.totalHits / 15)){
             showLoadMoreButton();
+        }else{
+            hideLoadMoreButton();
+            iziToast.show({
+                message: "We're sorry, but you've reached the end of search results."
+            });
         }
 
     }catch{
@@ -73,11 +79,12 @@ showMoreBtn.addEventListener("click", async(e) => {
     // console.log("rect: ", rect);
 
     showLoader();
+    hideLoadMoreButton()
     try{
         const data = await getImagesByQuery(currentQuery, currentPage);
         hideLoader();
 
-        if (data.totalHits === 0) {
+        if (data.hits.length === 0) {
             iziToast.show({
                 message: 'Sorry, there are no images matching your search query. Please try again!'
             });
@@ -96,10 +103,11 @@ showMoreBtn.addEventListener("click", async(e) => {
                 message: "We're sorry, but you've reached the end of search results."
             });
         }
-
+        showLoadMoreButton();
         // input.value = '';
     }catch{
         hideLoader();
+        showLoadMoreButton();
         iziToast.show({
             message: 'Sorry, there was an error fetching images. Please try again!'
         });

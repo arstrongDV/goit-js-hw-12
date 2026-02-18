@@ -1,4 +1,4 @@
-import getImagesByQuery from './js/pixabay-api'
+import getImagesByQuery from './js/pixabay-api.js'
 import { 
     createGallery, 
     hideLoader, 
@@ -102,8 +102,9 @@ showMoreBtn.addEventListener("click", async(e) => {
             iziToast.show({
                 message: "We're sorry, but you've reached the end of search results."
             });
+        }else{
+            showLoadMoreButton();
         }
-        showLoadMoreButton();
         // input.value = '';
     }catch{
         hideLoader();
